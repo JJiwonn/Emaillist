@@ -1,3 +1,5 @@
+<%@page import="himedia.dao.EmaillistDao"%>
+<%@page import="himedia.dao.EmailVo"%>
 <%@ page import="java.sql.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,6 +15,12 @@ String firstname = request.getParameter("fn");  // 이름
 String lastname = request.getParameter("ln");  // 성
 String email = request.getParameter("email");  // 이메일
 
+EmailVo vo = new EmailVo(lastName, firstName, email);
+EmaillistDao dao = new EmaillsitDaoOracleImpl(dbuser, dbpass);
+
+boolean success = dao.insert(no);
+
+/*
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
 
 try {
@@ -36,10 +44,17 @@ try {
 		// 다른 페이지로 리다이텍트 : 3xx
 		response.sendRedirect(request.getContextPath());
 	} else {
+		*/
+if(success) {	//INSERT 성공
+	response.sendRedirect(request.getContextPath());
+} else {
 		%>
+		
 		<h1>Error</h1>
 		<p>데이터 입력 중 오류가 발생했습니다.</p>
 		<%
+}
+		/*
 	}
 	// 자원 정리
 	pstmt.close();
@@ -47,4 +62,5 @@ try {
 } catch (Exception e) {
 	throw e;
 }
+*/
 %>
