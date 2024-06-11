@@ -27,7 +27,7 @@
 		</form>
 
 		<p>
-			<a href="<%= request.getContextPath() %>">목록</a>
+			<a href="<%= request.getContextPath() %>/emaillist/">목록</a>
 		</p>
 	</body>
 

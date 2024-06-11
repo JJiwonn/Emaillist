@@ -1,6 +1,7 @@
 package himedia.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,12 +10,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class EmaillistDaoOraclelmpl implements EmaillistDao {
+import himedia.vo.EmailVo;
+
+public class EmaillistDaoOracleImpl implements EmaillistDao {
 	private String dbuser;
 	private String dbpass;
 	
 	// 생성자
-	public EmaillistDaoOraclelmpl(String dbuser, String dbpass) {
+	public EmaillistDaoOracleImpl(String dbuser, String dbpass) {
 		this.dbuser = dbuser;
 		this.dbpass = dbpass;
 	}
@@ -76,7 +79,7 @@ public class EmaillistDaoOraclelmpl implements EmaillistDao {
 			}
 		}
 				
-		return null;
+		return list;
 	}
 
 	@Override
@@ -94,7 +97,7 @@ public class EmaillistDaoOraclelmpl implements EmaillistDao {
 			pstmt = conn.prepareStatement(sql);
 			// 데이터 바인딩
 			pstmt.setString(1, vo.getLastName());
-			pstmt.setString(2, vo.getFirsttName());
+			pstmt.setString(2, vo.getFirstName());
 			pstmt.setString(3, vo.getEmail());
 			// 확정된 쿼리 수행
 			insertedCount = pstmt.executeUpdate();
